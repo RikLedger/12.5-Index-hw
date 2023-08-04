@@ -14,7 +14,7 @@
   select SUM(data_length) sod, SUM(index_length) soi
   from INFORMATION_SCHEMA.TABLES) t1;
 ```
-![12-5-1](./hw-12-5/12-5-1.png)
+![1-1](./12.5-1-001.jpg)
 
 ---
 
@@ -32,11 +32,12 @@ where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and
 
   ### Решение 2
 
-![12-5-2-1](./hw-12-5/12-5-2-1.png)
+*1
 Узкие места наблюдаются в момент использования оконных функций OVER и PARTITION BY, а  так же в  момент фильтрации вывода, в сравнении колонок из разных таблиц.
 
+![2-1](./12.5-2-001.jpg)
 
-
+*2
 ```sql
 create index day_of_payment on payment(payment_date);
 select distinct concat(c.last_name, ' ', c.first_name), sum(p.amount) 
@@ -47,4 +48,4 @@ join inventory i on i.inventory_id = r.inventory_id
 where date(p.payment_date) = '2005-07-30' 
 group by concat(c.last_name, ' ', c.first_name); 
 ```
-![12-5-2-2](./hw-12-5/12-5-2-2.png)
+![2-2](./12.5-2-002.jpg)
